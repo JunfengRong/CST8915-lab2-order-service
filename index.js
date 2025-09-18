@@ -11,13 +11,13 @@ app.use(express.json());  // Middleware to parse incoming JSON request bodies.
 app.use(cors());
 
 // URL for connecting to RabbitMQ (localhost means it's running locally).
-const RABBITMQ_URL = 'amqp://localhost';
+const RABBITMQ_URL = 'amqp://20.64.233.157';
 
 // Define a POST route for creating orders
 // This route is accessed when a client (e.g., frontend) sends an order.
 app.post('/orders', (req, res) => {
   const order = req.body;  // Extract the order data from the request body.
-  
+
   // Connect to RabbitMQ server
   amqp.connect(RABBITMQ_URL, (err, conn) => {
     if (err) {
@@ -55,5 +55,5 @@ app.post('/orders', (req, res) => {
 // In this case, it's running on port 3000.
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Order service is running on http://localhost:${PORT}`);
+  console.log(`Order service is running on http://0.0.0.0:${PORT}`);
 });
